@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuScript : MonoBehaviour
+public class SettingsMenuUI_Script : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,26 +16,13 @@ public class MainMenuScript : MonoBehaviour
     {
         
     }
-    public void PlayGame()
+
+    public void ExitButton()
     {
 
         // Loading the Scene.
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainMenuUI_Scene");
 
     }
 
-    public void SettingsMenu()
-    {
-
-        // Loading the Scene.
-        SceneManager.LoadScene("SettingsMenuUI_Scene");
-
-    }
-
-    public void QuitGame()
-    {
-
-        Application.Quit();
-
-    }
 }
