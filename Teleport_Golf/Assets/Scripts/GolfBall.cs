@@ -26,7 +26,7 @@ public class GolfBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.magnitude > 0.1f)
+        if (rb.velocity.magnitude > 0.4f)
             ballStationary = false;
         else
         {
@@ -55,20 +55,24 @@ public class GolfBall : MonoBehaviour
             {
                 Vector2 endDragPosVisual = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-                powerVisual = (Mathf.Clamp(Vector2.Distance(startDragPos, endDragPosVisual), 0.5f, 12.0f) - 0.5f) / (12f - 0.5f);
+                powerVisual = (Mathf.Clamp(Vector2.Distance(transform.position, endDragPosVisual) * 8f, 0.5f, 20.0f) - 0.5f) / (20f - 0.5f);
             }
+
+            Time.timeScale = 1.0f;
         }
 
         if (!ballStationary)
         {
+            Time.timeScale = 0.5f;
             LinearDrag();
         }
     }
 
     private void Launch()
     {
-        Vector2 dir = (startDragPos - endDragPos).normalized;
-        float power = Mathf.Clamp(Vector2.Distance(startDragPos, endDragPos), 0.5f, 12.0f);
+        Vector2 temp = new Vector2(transform.position.x, transform.position.y);
+        Vector2 dir = (temp - endDragPos).normalized;
+        float power = Mathf.Clamp(Vector2.Distance(temp, endDragPos) * 8f, 0.5f, 20.0f);
 
         Debug.Log(power);
 
