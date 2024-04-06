@@ -11,7 +11,7 @@ public class GolfBall : MonoBehaviour
     Vector2 endDragPos = Vector2.zero;
     private Rigidbody2D rb;
     bool ballStationary = true;
-    public float dragCo = 0.5f;
+    public float dragCo;
     bool clickedDown = false;
 
     public float powerVisual = 0.0f;
