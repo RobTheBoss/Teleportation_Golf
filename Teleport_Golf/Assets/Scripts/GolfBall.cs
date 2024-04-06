@@ -74,8 +74,6 @@ public class GolfBall : MonoBehaviour
         Vector2 dir = (temp - endDragPos).normalized;
         float power = Mathf.Clamp(Vector2.Distance(temp, endDragPos) * 12f, 0.5f, 35.0f);
 
-        Debug.Log(power);
-
         rb.velocity = dir * power * (1 / Time.timeScale);
     }
 
