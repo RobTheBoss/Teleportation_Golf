@@ -1024,6 +1024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b048aa2a0cb720446a944988965c7b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackgroundMusicAudio: {fileID: 800340370}
+  ButtonAudio: {fileID: 495025957}
 --- !u!1 &1112833849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,6 +1764,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 854127610}
+  - {fileID: 1343006452}
   - {fileID: 1928305021}
   - {fileID: 2039309800}
-  - {fileID: 1343006452}
