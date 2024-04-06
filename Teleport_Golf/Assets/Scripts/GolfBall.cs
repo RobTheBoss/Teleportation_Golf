@@ -70,6 +70,5 @@ public class GolfBall : MonoBehaviour
     {
         Vector2 linearDrag = rb.velocity * dragCo;
         rb.velocity -= linearDrag * Time.fixedDeltaTime;
-
     }
 }
