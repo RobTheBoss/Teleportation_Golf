@@ -14,6 +14,8 @@ public class GolfBall : MonoBehaviour
     public float dragCo = 0.5f;
     bool clickedDown = false;
 
+    public float powerVisual = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,13 @@ public class GolfBall : MonoBehaviour
                 clickedDown = false;
                 Launch();
             }
+
+            if (clickedDown)
+            {
+                Vector2 endDragPosVisual = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                powerVisual = (Mathf.Clamp(Vector2.Distance(startDragPos, endDragPosVisual), 0.5f, 12.0f) - 0.5f) / (12f - 0.5f);
+            }
         }
 
         if (!ballStationary)
@@ -59,7 +68,7 @@ public class GolfBall : MonoBehaviour
     private void Launch()
     {
         Vector2 dir = (startDragPos - endDragPos).normalized;
-        float power = Mathf.Clamp(Vector2.Distance(startDragPos, endDragPos), 0.2f, 10.0f);
+        float power = Mathf.Clamp(Vector2.Distance(startDragPos, endDragPos), 0.5f, 12.0f);
 
         Debug.Log(power);
 
