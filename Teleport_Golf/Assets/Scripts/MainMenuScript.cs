@@ -16,8 +16,6 @@ public class MainMenuScript : MonoBehaviour
     {
         
     }
-
-    // To play the Level 2.
     public void PlayGame()
     {
 
@@ -30,7 +28,14 @@ public class MainMenuScript : MonoBehaviour
     {
 
         // Loading the Scene.
-        //SceneManager.LoadScene("SettingsMenuUIScene");
+        SceneManager.LoadScene("SettingsMenuUIScene");
+
+    }
+
+    public void QuitGame()
+    {
+
+        Application.Quit();
 
     }
 }
