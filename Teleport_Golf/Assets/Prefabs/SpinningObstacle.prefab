@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 8656402246742018586}
   - component: {fileID: 8816576408940606710}
   m_Layer: 0
-  m_Name: SpinningWall
+  m_Name: SpinningObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -7,7 +7,7 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     public Transform otherPortal;
-    static float cooldownTotal = 0.1f;
+    static float cooldownTotal = 1.0f;
     static float cooldown = 0.0f;
     static bool canTeleport = true;
 
@@ -35,8 +35,8 @@ public class Portal : MonoBehaviour
     {
         if (collision.CompareTag("Golfball") && canTeleport)
         {
-            collision.transform.position = otherPortal.position;
             cooldown = cooldownTotal;
+            collision.transform.position = otherPortal.position;
         }
     }
 }
