@@ -6,12 +6,10 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour
 {
 
-    public AudioSource BackgroundMusicAudio;
-    public AudioSource ButtonAudio;
     // Start is called before the first frame update
     void Start()
     {
-        BackgroundMusicAudio.Play();
+
     }
 
     // Update is called once per frame
@@ -22,7 +20,6 @@ public class MainMenuScript : MonoBehaviour
     public void PlayGame()
     {
 
-        ButtonAudio.Play();
         // Loading the Scene.
         SceneManager.LoadScene("SampleScene");
 
@@ -31,7 +28,6 @@ public class MainMenuScript : MonoBehaviour
     public void SettingsMenu()
     {
 
-        ButtonAudio.Play();
     // Loading the Scene.
     SceneManager.LoadScene("SettingsMenuUI_Scene");
 
@@ -39,7 +35,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void QuitGame()
     {
-        ButtonAudio.Play();
+
         Application.Quit();
 
     }
