@@ -20,8 +20,6 @@ public class MovingWall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(animationCurve.Evaluate(Time.time));
-
         transform.position = Vector2.Lerp(point1, point2, animationCurve.Evaluate(Time.time * speedMultiplier));
     }
 }

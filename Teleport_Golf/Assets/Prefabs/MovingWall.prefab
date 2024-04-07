@@ -132,7 +132,7 @@ MonoBehaviour:
     m_PostInfinity: 0
     m_RotationOrder: 4
   point2: {x: 5.34, y: -2.52}
-  speedMultiplier: 0.4
+  speedMultiplier: 0.7
 --- !u!61 &2018853967956936046
 BoxCollider2D:
   m_ObjectHideFlags: 0

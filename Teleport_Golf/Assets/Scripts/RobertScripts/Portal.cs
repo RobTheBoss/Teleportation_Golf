@@ -33,7 +33,7 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Golfball") && canTeleport)
+        if (collision.CompareTag("Golfball") && canTeleport && otherPortal != null)
         {
             cooldown = cooldownTotal;
             collision.transform.position = otherPortal.position;

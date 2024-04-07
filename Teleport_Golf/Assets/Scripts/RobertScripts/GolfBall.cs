@@ -14,6 +14,9 @@ public class GolfBall : MonoBehaviour
     public float dragCo;
     bool clickedDown = false;
 
+    [SerializeField] float maxPower = 35f;
+    [SerializeField] float minPower = 0.5f;
+
     public float powerVisual = 0.0f;
 
     // Start is called before the first frame update
@@ -55,7 +58,7 @@ public class GolfBall : MonoBehaviour
             {
                 Vector2 endDragPosVisual = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-                powerVisual = (Mathf.Clamp(Vector2.Distance(transform.position, endDragPosVisual) * 12f, 0.5f, 35.0f) - 0.5f) / (35.0f - 0.5f);
+                powerVisual = (Mathf.Clamp(Vector2.Distance(transform.position, endDragPosVisual) * 12f, minPower, maxPower) - minPower) / (maxPower - minPower);
             }
 
             Time.timeScale = 1.0f;
@@ -72,8 +75,15 @@ public class GolfBall : MonoBehaviour
     {
         Vector2 temp = new Vector2(transform.position.x, transform.position.y);
         Vector2 dir = (temp - endDragPos).normalized;
-        float power = Mathf.Clamp(Vector2.Distance(temp, endDragPos) * 12f, 0.5f, 35.0f);
+        float power = Mathf.Clamp(Vector2.Distance(temp, endDragPos) * 12f, minPower, maxPower);
 
+        rb.velocity = dir * power * (1 / Time.timeScale);
+
+        GameManager.hits++;
+    }
+
+    public void BumpLaunch(float power, Vector2 dir)
+    {
         rb.velocity = dir * power * (1 / Time.timeScale);
     }
 
