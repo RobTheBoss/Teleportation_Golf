@@ -357,7 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07be1ab78a460ee45a862d88b6ee1dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stickinessMultiplier: 4
+  stickinessMultiplier: 5
+  SlowAudio: {fileID: 0}
 --- !u!1 &7034909407508202517
 GameObject:
   m_ObjectHideFlags: 0

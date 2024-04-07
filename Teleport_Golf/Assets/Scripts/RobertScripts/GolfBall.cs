@@ -11,7 +11,8 @@ public class GolfBall : MonoBehaviour
     Vector2 endDragPos = Vector2.zero;
     private Rigidbody2D rb;
     bool ballStationary = true;
-    public float dragCo;
+    public float origdragCo;
+    [HideInInspector] public float dragCo;
     bool clickedDown = false;
 
     [SerializeField] float maxPower = 35f;
@@ -30,11 +31,18 @@ public class GolfBall : MonoBehaviour
         Time.timeScale = 1.0f;
 
         arrow = GameObject.FindGameObjectWithTag("Arrow");
+
+        dragCo = origdragCo;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (rb.velocity.magnitude < 5.0f)
+            dragCo = origdragCo * 5f;
+        else
+            dragCo = origdragCo;
+
         if (rb.velocity.magnitude > 0.6f)
             ballStationary = false;
         else
@@ -97,6 +105,8 @@ public class GolfBall : MonoBehaviour
         float power = Mathf.Clamp(Vector2.Distance(temp, endDragPos) * 12f, minPower, maxPower);
 
         rb.velocity = dir * power * (1 / Time.timeScale);
+
+        Debug.Log(power);
 
         GameManager.hits++;
     }

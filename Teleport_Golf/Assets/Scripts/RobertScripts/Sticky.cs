@@ -14,7 +14,7 @@ public class Sticky : MonoBehaviour
     void Start()
     {
         
-        defaultDragCo = GameObject.FindGameObjectWithTag("Golfball").GetComponent<GolfBall>().dragCo;
+        defaultDragCo = GameObject.FindGameObjectWithTag("Golfball").GetComponent<GolfBall>().origdragCo;
         stickyDragCo = defaultDragCo * stickinessMultiplier;
     }
 
@@ -29,7 +29,7 @@ public class Sticky : MonoBehaviour
         SlowAudio.Play();
         if (collision.CompareTag("Golfball"))
         {
-            collision.gameObject.GetComponent<GolfBall>().dragCo = stickyDragCo;
+            collision.gameObject.GetComponent<GolfBall>().origdragCo = stickyDragCo;
         }
     }
 
@@ -38,7 +38,7 @@ public class Sticky : MonoBehaviour
         
         if (collision.CompareTag("Golfball"))
         {
-            collision.gameObject.GetComponent<GolfBall>().dragCo = defaultDragCo;
+            collision.gameObject.GetComponent<GolfBall>().origdragCo = defaultDragCo;
         }
     }
 }

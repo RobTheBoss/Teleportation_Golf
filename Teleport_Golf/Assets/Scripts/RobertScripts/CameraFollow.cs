@@ -6,6 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     private Transform player;
     [SerializeField] float lerpSpeed;
+    [SerializeField] bool hardFollow = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,15 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.Lerp(transform.position, player.position, lerpSpeed * Time.unscaledDeltaTime);
-        transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
+        if (hardFollow)
+        {
+            transform.position = Vector2.Lerp(transform.position, player.position, 1);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+        }
+        else
+        {
+            transform.position = Vector2.Lerp(transform.position, player.position, lerpSpeed * Time.unscaledDeltaTime);
+            transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
+        }
     }
 }
