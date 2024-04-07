@@ -21,6 +21,8 @@ public class GolfBall : MonoBehaviour
 
     private GameObject arrow;
 
+    public AudioSource LaunchBallAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,6 +91,7 @@ public class GolfBall : MonoBehaviour
 
     private void Launch()
     {
+        LaunchBallAudio.Play();
         Vector2 temp = new Vector2(transform.position.x, transform.position.y);
         Vector2 dir = (temp - endDragPos).normalized;
         float power = Mathf.Clamp(Vector2.Distance(temp, endDragPos) * 12f, minPower, maxPower);

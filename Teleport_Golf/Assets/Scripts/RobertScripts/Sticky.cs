@@ -8,9 +8,12 @@ public class Sticky : MonoBehaviour
     private float stickyDragCo;
     [SerializeField] float stickinessMultiplier;
 
+    public AudioSource SlowAudio;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         defaultDragCo = GameObject.FindGameObjectWithTag("Golfball").GetComponent<GolfBall>().dragCo;
         stickyDragCo = defaultDragCo * stickinessMultiplier;
     }
@@ -23,6 +26,7 @@ public class Sticky : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        SlowAudio.Play();
         if (collision.CompareTag("Golfball"))
         {
             collision.gameObject.GetComponent<GolfBall>().dragCo = stickyDragCo;
@@ -31,6 +35,7 @@ public class Sticky : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        
         if (collision.CompareTag("Golfball"))
         {
             collision.gameObject.GetComponent<GolfBall>().dragCo = defaultDragCo;
