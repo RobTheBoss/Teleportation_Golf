@@ -10,6 +10,8 @@ public class Conveyor : MonoBehaviour
     [SerializeField] float speed;
     private Rigidbody2D ballRB;
 
+    public AudioSource Conveyor_SoundEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +27,19 @@ public class Conveyor : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        
         if (collision.CompareTag("Golfball"))
         {
             ballRB.AddForce(transform.up * speed * 50 * Time.timeScale);
             Debug.Log("Pushing");
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if (collision.CompareTag("Golfball"))
+        {
+            Conveyor_SoundEffect.Play();
         }
     }
 }

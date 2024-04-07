@@ -23,6 +23,7 @@ public class Bumper : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Bumper_SoundEffect.Play();
+
         if (collision.gameObject.CompareTag("Golfball"))
         {
             Vector2 dir = (collision.transform.position - transform.position).normalized;
