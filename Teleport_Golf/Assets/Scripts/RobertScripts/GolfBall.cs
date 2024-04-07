@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -13,6 +13,7 @@ public class GolfBall : MonoBehaviour
     bool ballStationary = true;
     public float origdragCo;
     [HideInInspector] public float dragCo;
+    bool applyDrag = false;
     bool clickedDown = false;
 
     [SerializeField] float maxPower = 35f;
@@ -23,6 +24,8 @@ public class GolfBall : MonoBehaviour
     private GameObject arrow;
 
     public AudioSource LaunchBallAudio;
+
+    [SerializeField] bool usingTouchInput = false;
 
     // Start is called before the first frame update
     void Start()
@@ -53,20 +56,43 @@ public class GolfBall : MonoBehaviour
 
         if (ballStationary)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (!usingTouchInput)
             {
-                startDragPos = Input.mousePosition;
-                startDragPos = Camera.main.ScreenToWorldPoint(startDragPos);
-                clickedDown = true;
-            }
-            else if (Input.GetMouseButtonUp(0) && clickedDown)
-            {
-                endDragPos = Input.mousePosition;
-                endDragPos = Camera.main.ScreenToWorldPoint(endDragPos);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    startDragPos = Input.mousePosition;
+                    startDragPos = Camera.main.ScreenToWorldPoint(startDragPos);
+                    clickedDown = true;
+                }
+                else if (Input.GetMouseButtonUp(0) && clickedDown)
+                {
+                    endDragPos = Input.mousePosition;
+                    endDragPos = Camera.main.ScreenToWorldPoint(endDragPos);
 
-                clickedDown = false;
-                Launch();
+                    clickedDown = false;
+                    Launch();
+                }
             }
+            else
+            {
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                    startDragPos = touch.position;
+                    startDragPos = Camera.main.ScreenToWorldPoint(startDragPos);
+                    clickedDown = true;
+                }
+                else if (touch.phase == TouchPhase.Ended && clickedDown)
+                {
+                    endDragPos = touch.position;
+                    endDragPos = Camera.main.ScreenToWorldPoint(endDragPos);
+
+                    clickedDown = false;
+                    Launch();
+                }
+            }
+
 
             if (clickedDown)
             {
@@ -83,17 +109,28 @@ public class GolfBall : MonoBehaviour
                 }
 
                 powerVisual = (Mathf.Clamp(Vector2.Distance(transform.position, endDragPosVisual) * 12f, minPower, maxPower) - minPower) / (maxPower - minPower);
+
+                if (usingTouchInput)
+                    powerVisual = (Mathf.Clamp(Vector2.Distance(transform.position, endDragPosVisual) * 8f, minPower, maxPower) - minPower) / (maxPower - minPower);
             }
             else
                 arrow.SetActive(false);
 
             Time.timeScale = 1.0f;
+            applyDrag = false;
         }
 
         if (!ballStationary)
         {
+            applyDrag = true;
+
             Time.timeScale = 0.3f;
-            LinearDrag();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("MainLevel");
+            GameManager.hits = 0;
         }
     }
 
@@ -103,6 +140,9 @@ public class GolfBall : MonoBehaviour
         Vector2 temp = new Vector2(transform.position.x, transform.position.y);
         Vector2 dir = (temp - endDragPos).normalized;
         float power = Mathf.Clamp(Vector2.Distance(temp, endDragPos) * 12f, minPower, maxPower);
+
+        if (usingTouchInput) 
+            power = Mathf.Clamp(Vector2.Distance(temp, endDragPos) * 8f, minPower, maxPower);
 
         rb.velocity = dir * power * (1 / Time.timeScale);
 
@@ -116,8 +156,10 @@ public class GolfBall : MonoBehaviour
         rb.velocity = dir * power * (1 / Time.timeScale);
     }
 
-    private void LinearDrag()
+    private void FixedUpdate()
     {
+        if (!applyDrag) return;
+
         Vector2 linearDrag = rb.velocity * dragCo;
         rb.velocity -= linearDrag * Time.fixedDeltaTime;
     }

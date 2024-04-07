@@ -10,6 +10,7 @@ public class Conveyor : MonoBehaviour
     [SerializeField] float speed;
     private Rigidbody2D ballRB;
 
+    private bool shouldAddForce = false;
     public AudioSource Conveyor_SoundEffect;
 
     // Start is called before the first frame update
@@ -25,12 +26,19 @@ public class Conveyor : MonoBehaviour
         rawImage.uvRect = new Rect(rawImage.uvRect.position + new Vector2(0, -speed) * Time.deltaTime, rawImage.uvRect.size);
     }
 
+    private void FixedUpdate()
+    {
+        if (shouldAddForce)
+            ballRB.AddForce(transform.up * speed * 100 * Time.timeScale);
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         
         if (collision.CompareTag("Golfball"))
         {
-            ballRB.AddForce(transform.up * speed * 50 * Time.timeScale);
+            shouldAddForce = true;
+
             Debug.Log("Pushing");
         }
     }
@@ -45,6 +53,8 @@ public class Conveyor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+
+        shouldAddForce = false;
 
         if (collision.CompareTag("Golfball"))
         {
