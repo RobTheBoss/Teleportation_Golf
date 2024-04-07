@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Golfball
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -44,4 +45,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: GolfBall
+    uniqueID: 384973115
     locked: 0

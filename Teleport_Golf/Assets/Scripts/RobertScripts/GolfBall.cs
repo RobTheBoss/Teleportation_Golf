@@ -19,17 +19,21 @@ public class GolfBall : MonoBehaviour
 
     public float powerVisual = 0.0f;
 
+    private GameObject arrow;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Time.timeScale = 1.0f;
+
+        arrow = GameObject.FindGameObjectWithTag("Arrow");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.magnitude > 0.4f)
+        if (rb.velocity.magnitude > 0.6f)
             ballStationary = false;
         else
         {
@@ -58,8 +62,20 @@ public class GolfBall : MonoBehaviour
             {
                 Vector2 endDragPosVisual = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+                //arrow.transform.rotation = Quaternion.LookRotation((Vector3)endDragPosVisual - transform.position);
+
+                arrow.SetActive(true);
+                Vector3 aimDirection = (Vector3)endDragPosVisual - transform.position;
+                if (aimDirection != Vector3.zero)
+                {
+                    float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
+                }
+
                 powerVisual = (Mathf.Clamp(Vector2.Distance(transform.position, endDragPosVisual) * 12f, minPower, maxPower) - minPower) / (maxPower - minPower);
             }
+            else
+                arrow.SetActive(false);
 
             Time.timeScale = 1.0f;
         }
