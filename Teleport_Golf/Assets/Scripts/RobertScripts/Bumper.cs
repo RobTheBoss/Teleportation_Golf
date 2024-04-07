@@ -6,6 +6,8 @@ public class Bumper : MonoBehaviour
 {
     [SerializeField] float bumpPower;
 
+    public AudioSource Bumper_SoundEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class Bumper : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Bumper_SoundEffect.Play();
         if (collision.gameObject.CompareTag("Golfball"))
         {
             Vector2 dir = (collision.transform.position - transform.position).normalized;

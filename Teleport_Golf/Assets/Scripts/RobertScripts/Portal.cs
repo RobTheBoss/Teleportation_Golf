@@ -11,6 +11,8 @@ public class Portal : MonoBehaviour
     static float cooldown = 0.0f;
     static bool canTeleport = true;
 
+    public AudioSource Portal_SoundEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Portal_SoundEffect.Play();
         if (collision.CompareTag("Golfball") && canTeleport && otherPortal != null)
         {
             cooldown = cooldownTotal;
