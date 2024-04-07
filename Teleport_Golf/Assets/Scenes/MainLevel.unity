@@ -1656,6 +1656,7 @@ MonoBehaviour:
   - {fileID: 505487413}
   - {fileID: 1488077283}
   - {fileID: 1228715009}
+  - {fileID: 1576518459}
 --- !u!4 &332762885
 Transform:
   m_ObjectHideFlags: 0
@@ -5347,11 +5348,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dae8c38a6373f974fbee36d3275a56dd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8b938d5b71019b340a9dcf8454ea7ee1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
