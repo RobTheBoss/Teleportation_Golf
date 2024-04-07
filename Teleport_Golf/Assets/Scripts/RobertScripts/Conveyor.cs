@@ -42,4 +42,13 @@ public class Conveyor : MonoBehaviour
             Conveyor_SoundEffect.Play();
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+        if (collision.CompareTag("Golfball"))
+        {
+            Conveyor_SoundEffect.Stop();
+        }
+    }
 }

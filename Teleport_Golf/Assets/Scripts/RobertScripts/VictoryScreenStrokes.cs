@@ -7,6 +7,11 @@ public class VictoryScreenStrokes : MonoBehaviour
 {
     private TextMeshProUGUI strokeText;
 
+    private void Awake()
+    {
+        strokeText = GetComponent<TextMeshProUGUI>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

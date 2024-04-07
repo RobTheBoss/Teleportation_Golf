@@ -24,4 +24,11 @@ public class WinScreen_Script : MonoBehaviour
         SceneManager.LoadScene("MainMenuUI_Scene");
 
     }
+
+    public void CloseAppButton()
+    {
+
+        // Loading the Scene.
+        Application.Quit();
+    }
 }
