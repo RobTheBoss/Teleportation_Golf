@@ -21,7 +21,7 @@ public class MainMenuScript : MonoBehaviour
     {
 
         // Loading the Scene.
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainLevel");
 
     }
 
