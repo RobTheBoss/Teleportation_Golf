@@ -26,9 +26,10 @@ public class Sticky : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SlowAudio.Play();
+        
         if (collision.CompareTag("Golfball"))
         {
+            SlowAudio.Play();
             collision.gameObject.GetComponent<GolfBall>().origdragCo = stickyDragCo;
         }
     }

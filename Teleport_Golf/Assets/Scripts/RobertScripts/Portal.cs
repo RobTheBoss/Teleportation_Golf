@@ -35,9 +35,10 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Portal_SoundEffect.Play();
+        
         if (collision.CompareTag("Golfball") && canTeleport && otherPortal != null)
         {
+            Portal_SoundEffect.Play();
             cooldown = cooldownTotal;
             collision.transform.position = otherPortal.position;
         }
