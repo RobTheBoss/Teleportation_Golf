@@ -73,7 +73,7 @@ public class GolfBall : MonoBehaviour
                     Launch();
                 }
             }
-            else
+            else if (usingTouchInput)
             {
                 Touch touch = Input.GetTouch(0);
 
@@ -97,6 +97,8 @@ public class GolfBall : MonoBehaviour
             if (clickedDown)
             {
                 Vector2 endDragPosVisual = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (usingTouchInput)
+                    endDragPosVisual = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
 
                 //arrow.transform.rotation = Quaternion.LookRotation((Vector3)endDragPosVisual - transform.position);
 
@@ -108,16 +110,15 @@ public class GolfBall : MonoBehaviour
                     transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
                 }
 
-                powerVisual = (Mathf.Clamp(Vector2.Distance(transform.position, endDragPosVisual) * 12f, minPower, maxPower) - minPower) / (maxPower - minPower);
 
+                powerVisual = (Mathf.Clamp(Vector2.Distance(transform.position, endDragPosVisual) * 12f, minPower, maxPower) - minPower) / (maxPower - minPower);
                 if (usingTouchInput)
                     powerVisual = (Mathf.Clamp(Vector2.Distance(transform.position, endDragPosVisual) * 8f, minPower, maxPower) - minPower) / (maxPower - minPower);
             }
             else
+            {
                 arrow.SetActive(false);
-
-            Time.timeScale = 1.0f;
-            applyDrag = false;
+            }
         }
 
         if (!ballStationary)
@@ -125,6 +126,11 @@ public class GolfBall : MonoBehaviour
             applyDrag = true;
 
             Time.timeScale = 0.3f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+            applyDrag = false;
         }
 
         if (Input.GetKeyDown(KeyCode.R))
